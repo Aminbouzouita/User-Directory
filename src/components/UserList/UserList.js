@@ -6,7 +6,8 @@ export class UserList extends Component {
 
   state = {
     search: "",
-    users: []
+    users: [],
+    sortOrder: ""
   };
 
   handleInputChange = event => {
@@ -18,6 +19,31 @@ export class UserList extends Component {
       [name]: value
     });
   };
+
+  handleSortedUsers = () => {
+    if (this.state.sortOrder === "" || this.state.sortOrder === "descend") {
+      const sortedlist = this.state.users.sort((a, b) => {
+        if (a.name.first < b.name.first) { return -1; }
+        if (a.name.first > b.name.first) { return 1; }
+        return 0;
+      })
+      this.setState({
+        users: sortedlist,
+        sortOrder: "ascend"
+      });
+    }
+    else if (this.state.sortOrder === "ascend") {
+      const sortedliste = this.state.users.sort((a, b) => {
+        if (a.name.first < b.name.first) { return 1; }
+        if (a.name.first > b.name.first) { return -1; }
+        return 0;
+      })
+      this.setState({
+        users: sortedliste,
+        sortOrder: "descend"
+      });
+    }
+  }
 
   componentWillMount() {
     getUsers()
@@ -40,7 +66,6 @@ export class UserList extends Component {
       const phone = user.phone;
       const password = user.login.password;
       const thumbnail = user.picture.large;
-
       if (first.includes(this.state.search) ||
         last.includes(this.state.search) ||
         dob.includes(this.state.search) ||
