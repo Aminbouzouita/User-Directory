@@ -1,0 +1,28 @@
+.title-item-container {
+margin-top: 50px;
+}
+
+.header {
+margin-top: 50px;
+}
+
+#imageTitle {
+    margin-left: 50px;
+}
+
+#search {
+    margin-left: 25px;
+    color: black;
+    width: 200px;
+}
+.sortedButton{
+    background-color: white;
+    border: hidden;
+}
+
+.sortedButton:hover {
+    color: red !important;
+    border: hidden;
+    transition: 0.4s;
+    
+}
