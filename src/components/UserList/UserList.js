@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import UserItem from '../UserItem/UserItem';
 import { getUsers } from '../../utils/Api';
+import './UserList.css'
 export class UserList extends Component {
 
   state = {
     search: "",
     users: []
+  };
+
+  handleInputChange = event => {
+    event.preventDefault();
+    const name = event.target.name;
+    const value = event.target.value;
+    console.log(name);
+    this.setState({
+      [name]: value
+    });
   };
 
   componentWillMount() {
@@ -29,7 +40,17 @@ export class UserList extends Component {
       const phone = user.phone;
       const password = user.login.password;
       const thumbnail = user.picture.large;
-    
+
+      if (first.includes(this.state.search) ||
+        last.includes(this.state.search) ||
+        dob.includes(this.state.search) ||
+        email.includes(this.state.search) ||
+        streetName.includes(this.state.search) ||
+        streetNumber.toString().includes(this.state.search) ||
+        streetName.includes(this.state.search) ||
+        phone.includes(this.state.search) ||
+        password.includes(this.state.search)) {
+
         return (
           <UserItem
             key={first + last + index}
@@ -41,6 +62,7 @@ export class UserList extends Component {
             password={password}
             thumbnail={thumbnail} />
         )
+      }
     })
   }
 
@@ -49,6 +71,8 @@ export class UserList extends Component {
       <div className="header">
         <label htmlFor="search" id="search">Search for</label>
         <input
+          onChange={this.handleInputChange}
+          value={this.state.search}
           name="search"
           type="text"
           className="form-control"
@@ -67,6 +91,7 @@ export class UserList extends Component {
               className="col"
             >
               <strong>Name</strong>
+              <button className="sortedButton" onClick={this.handleSortedUsers}>?sort?</button>
             </div>
             <div className="col">
               <strong>Address</strong>
@@ -84,6 +109,7 @@ export class UserList extends Component {
               <strong>Password</strong>
             </div>
           </div>
+          {this.renderUserItems()}
         </ul>
       </div>
     );
