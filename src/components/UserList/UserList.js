@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UserItem from '../UserItem/UserItem';
 import { getUsers } from '../../utils/Api';
 export class UserList extends Component {
 
@@ -14,6 +15,33 @@ export class UserList extends Component {
           users: data
         });
       });
+  }
+
+  renderUserItems() {
+    return this.state.users.map((user, index) => {
+      const first = user.name.first;
+      const last = user.name.last;
+      const streetNumber = user.location.street.number;
+      const streetName = user.location.street.name;
+      const title = user.name.title;
+      const dob = user.dob.date.slice(0, 10);
+      const email = user.email;
+      const phone = user.phone;
+      const password = user.login.password;
+      const thumbnail = user.picture.large;
+    
+        return (
+          <UserItem
+            key={first + last + index}
+            name={title + " " + first + " " + last}
+            dob={dob}
+            email={email}
+            address={streetNumber + " " + streetName}
+            phone={phone}
+            password={password}
+            thumbnail={thumbnail} />
+        )
+    })
   }
 
   render() {
