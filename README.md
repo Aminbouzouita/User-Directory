@@ -1,6 +1,6 @@
 # User-Directory
 ## Description
-An application that allow user to see random users informations , search through all as well as sort them in alphabetical order.
+An application that allows the user to see random users' information, search through all provided, organized in alphabetical order.
 ## Technologies used
 * [HTML5](#HTML5)
 * [CSS3](#CSS3)
